@@ -11,3 +11,17 @@ public class ApplicationStart {
 		SpringApplication.run(ApplicationStart.class, args);
 	}
 }
+
+/**
+ * @EnableAutoConfiguration 
+ * A anotação diz ao Spring Boot para "adivinhar" como você deseja configurar o Spring, 
+ * com base nas dependências do jar que você adicionou. Por exemplo, se o HSQLDB estiver 
+ * no seu caminho de classe e você não tiver configurado manualmente nenhum bean de conexão 
+ * com o banco de dados, o Spring configurará automaticamente um banco de dados na memória.
+
+@ComponentScan 
+diz ao Spring para procurar outros componentes, configurações e serviços no pacote especificado. 
+O Spring é capaz de verificar automaticamente, detectar e registrar seus beans 
+ou componentes de um pacote de projeto predefinido. Se nenhum pacote for especificado, 
+o pacote de classe atual será considerado o pacote raiz.
+ */

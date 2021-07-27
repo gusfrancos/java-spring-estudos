@@ -48,3 +48,17 @@ public class AnimeController {
 	}
 	
 }
+
+
+/**
+ * => A anotação @RestController permite definir um controller com características REST;
+ * => A anotação @Autowired delega ao Spring Boot a inicialização do objeto;
+ * => A anotação @RequestMapping permite definir uma rota. Caso não seja informado o método HTTP da rota, ela será definida para todos os métodos.
+ * => A anotação @PathVariable indica que o valor da variável virá de uma informação da rota;
+ * => A anotação @RequestBody indica que o valor do objeto virá do corpo da requisição;
+ * => E a anotação @Valid indica que os dados recebidos devem ser validados.
+ */
+
+
+
+
