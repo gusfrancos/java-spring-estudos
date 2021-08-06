@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("anime")
 @Log4j2
 
-//terceira forma de fazer é com @RequiredArgsConstructor (Ele cria um construtor com todos os campos)
+//terceira forma de fazer é com @RequiredArgsConstructor (Ele cria um construtor com todos os campos que são finais)
 @RequiredArgsConstructor
 public class AnimeController {
 	

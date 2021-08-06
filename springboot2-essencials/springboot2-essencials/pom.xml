@@ -26,6 +26,8 @@
   <dependencies>
 	<!-- Inicio Spring dependencias -->
 	<dependency>
+	<!-- Esta dependencia cotem o hot swap -->
+	<!-- deixa inicialização mais rápida e vc não precisa ficar reiniciando o app a cada atualização de código -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-devtools</artifactId>
 		<scope>runtime</scope>
