@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.estudos.springboot2.domain.Anime;
+import br.com.estudos.springboot2.service.AnimeService;
 import br.com.estudos.springboot2.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.extern.log4j.Log4j2;
 
 
 @RestController
-@RequestMapping("anime")
+@RequestMapping("animes")
 @Log4j2
 
 //terceira forma de fazer é com @RequiredArgsConstructor (Ele cria um construtor com todos os campos que são finais)
@@ -34,18 +35,19 @@ public class AnimeController {
 
 	
 	private final DateUtil dateUtil;
+	private final AnimeService animeService;
 	
-	@GetMapping(path = "list")
+	@GetMapping
 	public List<Anime> list(){
 		log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
-		return List.of(new Anime("DBZ"), new Anime("Berserk"));
+		return animeService.listAll();
 	}
 	
-	@GetMapping(path = "list2")
-	public List<Anime> list2(){
-		log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
-		return List.of(new Anime("One Piece"), new Anime("Berserk"), new Anime("hdhfhf"));
-	}
+//	@GetMapping(path = "list2")
+//	public List<Anime> list2(){
+//		log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
+//		return List.of(new Anime("One Piece"), new Anime("Berserk"), new Anime("hdhfhf"));
+//	}
 	
 }
 

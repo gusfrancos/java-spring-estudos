@@ -1,24 +1,13 @@
 package br.com.estudos.springboot2.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class Anime {
+	private Long id;
 	private String name;
-
-	public Anime(String name) {
-		this.name = name;
-	}
-
-	public Anime() {
-		
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	
-	
 }
+
+//@Data do longbok vai gerar os getters, setters, equal, hashcode e etc... 
