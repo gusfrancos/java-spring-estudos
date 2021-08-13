@@ -7,7 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.estudos.springboot2.domain.Anime;
@@ -67,6 +70,11 @@ public class AnimeController {
 		//outra forma
 		//return ResponseEntity.ok(animeService.listAll().get(id));
 	}
+	
+	@PostMapping
+    public ResponseEntity<Anime> save(@RequestBody Anime anime){
+        return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
+    }
 	
 	
 //	@GetMapping(path = "list2")
