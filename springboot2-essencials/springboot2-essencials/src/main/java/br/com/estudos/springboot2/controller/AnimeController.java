@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -72,6 +73,12 @@ public class AnimeController {
 		//return ResponseEntity.ok(animeService.listAll().get(id));
 	}
 	
+//	@GetMapping(path = "list2")
+//	public List<Anime> list2(){
+//		log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
+//		return List.of(new Anime("One Piece"), new Anime("Berserk"), new Anime("hdhfhf"));
+//	}
+	
 	@PostMapping
     public ResponseEntity<Anime> save(@RequestBody Anime anime){
         return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
@@ -83,12 +90,13 @@ public class AnimeController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	
+	//
+	@PutMapping
+    public ResponseEntity<Void> replace(@RequestBody Anime anime) {
+        animeService.replace(anime);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 	
-//	@GetMapping(path = "list2")
-//	public List<Anime> list2(){
-//		log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
-//		return List.of(new Anime("One Piece"), new Anime("Berserk"), new Anime("hdhfhf"));
-//	}
 	
 }
 
