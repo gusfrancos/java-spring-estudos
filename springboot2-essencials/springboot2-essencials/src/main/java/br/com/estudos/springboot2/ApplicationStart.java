@@ -12,6 +12,8 @@ public class ApplicationStart {
 	}
 }
 
+// não esquece de instalar o pluging no lombok, além de configurar as refêrencias
+
 /**
  * @EnableAutoConfiguration 
  * A anotação diz ao Spring Boot para "adivinhar" como você deseja configurar o Spring, 
