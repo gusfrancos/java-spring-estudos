@@ -1,0 +1,4 @@
+docker-compose up (Levanta o conteiner se o volume não existir vai gerar um conteiner apartir de um yml)
+docker ps (Lista de conteiners)
+docker ps -a (Lista de conteiners)
+docker-compose down
