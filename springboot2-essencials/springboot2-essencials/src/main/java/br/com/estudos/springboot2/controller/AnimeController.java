@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.estudos.springboot2.domain.Anime;
+import br.com.estudos.springboot2.requests.AnimePostRequestBody;
+import br.com.estudos.springboot2.requests.AnimePutRequestBody;
 import br.com.estudos.springboot2.service.AnimeService;
 import br.com.estudos.springboot2.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -58,7 +60,7 @@ public class AnimeController {
 		log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
 
 		// boa pratica: retornar o status desta requição
-		return new ResponseEntity<>(animeService.findById(id), HttpStatus.OK);
+		return new ResponseEntity<>(animeService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
 
 		// outra forma
 		// return ResponseEntity.ok(animeService.listAll().get(id));
@@ -71,9 +73,9 @@ public class AnimeController {
 //	}
 
 	@PostMapping
-	public ResponseEntity<Anime> save(@RequestBody Anime anime) {
-		return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
-	}
+    public ResponseEntity<Anime> save(@RequestBody AnimePostRequestBody animePostRequestBody) {
+        return new ResponseEntity<>(animeService.save(animePostRequestBody), HttpStatus.CREATED);
+    }
 
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable long id) {
@@ -81,12 +83,11 @@ public class AnimeController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	//
 	@PutMapping
-	public ResponseEntity<Void> replace(@RequestBody Anime anime) {
-		animeService.replace(anime);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
+    public ResponseEntity<Void> replace(@RequestBody AnimePutRequestBody animePutRequestBody) {
+        animeService.replace(animePutRequestBody);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }
 
