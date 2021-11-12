@@ -1,13 +1,15 @@
 package br.com.estudos.springboot2.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.estudos.springboot2.domain.Anime;
-import br.com.estudos.springboot2.mapper.AnimeMapper;
 import br.com.estudos.springboot2.repository.AnimeRepository;
 import br.com.estudos.springboot2.requests.AnimePostRequestBody;
 import br.com.estudos.springboot2.requests.AnimePutRequestBody;
@@ -15,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AnimeService {
+public class AnimeService_V2 {
 
     private final AnimeRepository animeRepository;
 
@@ -29,7 +31,7 @@ public class AnimeService {
     }
 
     public Anime save(AnimePostRequestBody animePostRequestBody) {
-        return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
+        return animeRepository.save(Anime.builder().name(animePostRequestBody.getName()).build());
     }
 
     public void delete(long id) {
@@ -38,8 +40,10 @@ public class AnimeService {
 
     public void replace(AnimePutRequestBody animePutRequestBody) {
         Anime savedAnime = findByIdOrThrowBadRequestException(animePutRequestBody.getId());
-        Anime anime = AnimeMapper.INSTANCE.toAnime(animePutRequestBody);
-        anime.setId(savedAnime.getId());
+        Anime anime = Anime.builder()
+                .id(savedAnime.getId())
+                .name(animePutRequestBody.getName())
+                .build();
 
         animeRepository.save(anime);
     }
