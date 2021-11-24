@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.estudos.springboot2.domain.Anime;
@@ -38,6 +39,13 @@ public class AnimeService {
 //                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not Found"));
 //    }
 
+    //Caso vc precise de um rollback qdo acontecer um erro use  @Transactional
+    //Se vc colocar esta anotation o spring não vai comitar esta trasação enquanto o método não terminar
+    
+    //Se a exceção for do tipo checked coloca o rollbackfor
+    //@Transactional(rollbackFor = Exception.class)]
+    
+    @Transactional
     public Anime save(AnimePostRequestBody animePostRequestBody) {
         return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
