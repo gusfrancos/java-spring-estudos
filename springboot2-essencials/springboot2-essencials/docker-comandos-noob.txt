@@ -2,3 +2,10 @@ docker-compose up (Levanta o conteiner se o volume não existir vai gerar um con
 docker ps (Lista de conteiners)
 docker ps -a (Lista de conteiners)
 docker-compose down
+
+
+
+docker-compose rm -v  Excluir tudo
+
+
+docker restart nome_do_conteiner
