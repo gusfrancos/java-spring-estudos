@@ -21,7 +21,7 @@ public class AnimeController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AnimeController.class);
 
 	// Primeira forma de fazer é com autowired sem constructor
-	 @Autowired
+	 //@Autowired
 	 private DateUtil dateUtil;
 	 //private final AnimeService animeService;
 	 
@@ -29,8 +29,9 @@ public class AnimeController {
 	public List<Anime> list(){
 		LOGGER.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
 		
-		return List.of(new Anime(1L, "Boku no Hero"), new Anime(2L, "Beserk"));
+		//return List.of(new Anime(1L, "Boku no Hero"), new Anime(2L, "Beserk"));
 		//return animeService.listAll();
+		return null;
 	}
 	
 	

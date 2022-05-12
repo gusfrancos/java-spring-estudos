@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "br.com.spring.estudos.springboot2essencials")
+//@ComponentScan(basePackages = "br.com.spring.estudos.springboot2essencials")
 public class Springboot2EssencialsApplication {
 
 	public static void main(String[] args) {
