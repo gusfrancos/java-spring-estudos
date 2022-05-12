@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "br.com.spring.estudos.springboot2essencials")
+//@ComponentScan(basePackages = "br.com.spring.estudos.springboot2essencials")
 public class Springboot2EssencialsApplication {
 
 	public static void main(String[] args) {
@@ -14,7 +14,9 @@ public class Springboot2EssencialsApplication {
 
 }
 
-//não esquece de instalar o pluging no lombok, além de configurar as refêrencias
+//**** Atenção
+//não esquece de instalar o pluging do lombok no eclipse, além de configurar as refêrencias
+// não esquecer de habilitar no eclipse o campo: enable annotation processing
 
 /**
 * @EnableAutoConfiguration 
