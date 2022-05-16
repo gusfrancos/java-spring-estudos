@@ -9,40 +9,48 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.spring.estudos.springboot2essencials.domain.Anime;
+import br.com.spring.estudos.springboot2essencials.repository.AnimeRepository;
+import br.com.spring.estudos.springboot2essencials.request.AnimePostRequestBody;
+import br.com.spring.estudos.springboot2essencials.request.AnimePutRequestBody;
+import lombok.RequiredArgsConstructor;
 
 
 @Service
+@RequiredArgsConstructor
 public class AnimeService {
-	private static List<Anime> animes;
+	
 
-    static {
-        animes = new ArrayList<>(List.of(new Anime(1L, "Boku No Hero"), new Anime(2L, "Berserk")));
+    private final AnimeRepository animeRepository;
+    
+	public List<Anime> listAll() {
+        return animeRepository.findAll();
     }
 
-    // private final AnimeRepository animeRepository;
-    public List<Anime> listAll() {
-        return animes;
-    }
-
-    public Anime findById(long id) {
-        return animes.stream()
-                .filter(anime -> anime.getId().equals(id))
-                .findFirst()
+        
+    public Anime findByIdOrThrowBadRequestException(long id) {
+        return animeRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not Found"));
     }
     
-    public Anime save(Anime anime) {
-        anime.setId(ThreadLocalRandom.current().nextLong(3, 100000));
-        animes.add(anime);
-        return anime;
-    }
     
+    
+    public Anime save(AnimePostRequestBody animePostRequestBody) {
+        return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
+    }
+
     public void delete(long id) {
-        animes.remove(findById(id));
+        animeRepository.delete(findByIdOrThrowBadRequestException(id));
     }
-    
-    public void replace(Anime anime) {
-        delete(anime.getId());
-        animes.add(anime);
+
+    public void replace(AnimePutRequestBody animePutRequestBody) {
+        Anime savedAnime = findByIdOrThrowBadRequestException(animePutRequestBody.getId());
+        Anime anime = AnimeMapper.INSTANCE.toAnime(animePutRequestBody);
+        anime.setId(savedAnime.getId());
+
+        animeRepository.save(anime);
     }
 }
+
+/**A anotação @Service representa esta classe como se fosse um serviço. 
+ * Já as anotações @Autowired permitem que o Spring injete as dependências nesta classe
+ */
