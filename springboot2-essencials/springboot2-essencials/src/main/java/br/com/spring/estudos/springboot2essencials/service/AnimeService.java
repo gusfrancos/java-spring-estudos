@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.spring.estudos.springboot2essencials.domain.Anime;
+import br.com.spring.estudos.springboot2essencials.mapper.AnimeMapper;
 import br.com.spring.estudos.springboot2essencials.repository.AnimeRepository;
 import br.com.spring.estudos.springboot2essencials.request.AnimePostRequestBody;
 import br.com.spring.estudos.springboot2essencials.request.AnimePutRequestBody;
