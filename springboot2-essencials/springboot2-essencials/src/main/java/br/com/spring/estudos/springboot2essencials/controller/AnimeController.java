@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.spring.estudos.springboot2essencials.domain.Anime;
+import br.com.spring.estudos.springboot2essencials.request.AnimePostRequestBody;
+import br.com.spring.estudos.springboot2essencials.request.AnimePutRequestBody;
 import br.com.spring.estudos.springboot2essencials.service.AnimeService;
 import br.com.spring.estudos.springboot2essencials.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -27,42 +29,79 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("animes")
 @Log4j2
+
+//terceira forma de fazer é com @RequiredArgsConstructor (Ele cria um construtor com todos os campos que são finais)
 @RequiredArgsConstructor
 public class AnimeController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AnimeController.class);
 
 	// Primeira forma de fazer é com autowired sem constructor
+	// @Autowired
+	// private DateUtil dateUtil;
 
-	@Autowired
-	private DateUtil dateUtil;
+	// Segunda forma de fazer é sem autowired e com constructor
+//	private DateUtil dateUtil;
+//	public AnimeController(DateUtil dateUtil) {
+//		this.dateUtil = dateUtil;
+//	}
 
+	private final DateUtil dateUtil;
 	private final AnimeService animeService;
 
 	@GetMapping
 	public ResponseEntity<List<Anime>> list() {
 		log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
+		// return animeService.listAll();
+
+		// boa pratica: retornar o status desta requição
+		// return new ResponseEntity<>(animeService.listAll(), HttpStatus.OK);
+
+		// outra forma
 		return ResponseEntity.ok(animeService.listAll());
 	}
 
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Anime> findById(@PathVariable long id) {
-		return ResponseEntity.ok(animeService.findById(id));
+		log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
+
+		// boa pratica: retornar o status desta requição
+		return new ResponseEntity<>(animeService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
+
+		// outra forma
+		// return ResponseEntity.ok(animeService.listAll().get(id));
 	}
 
+//	@GetMapping(path = "list2")
+//	public List<Anime> list2(){
+//		log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
+//		return List.of(new Anime("One Piece"), new Anime("Berserk"), new Anime("hdhfhf"));
+//	}
+
 	@PostMapping
-	public ResponseEntity<Anime> save(@RequestBody Anime anime) {
-		return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
-	}
+    public ResponseEntity<Anime> save(@RequestBody AnimePostRequestBody animePostRequestBody) {
+        return new ResponseEntity<>(animeService.save(animePostRequestBody), HttpStatus.CREATED);
+    }
 
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable long id) {
 		animeService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@PutMapping
-    public ResponseEntity<Void> replace(@RequestBody Anime anime) {
-        animeService.replace(anime);
+    public ResponseEntity<Void> replace(@RequestBody AnimePutRequestBody animePutRequestBody) {
+        animeService.replace(animePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
+
+/**
+ * => A anotação @RestController permite definir um controller com
+ * características REST; => A anotação @Autowired delega ao Spring Boot a
+ * inicialização do objeto; => A anotação @RequestMapping permite definir uma
+ * rota. Caso não seja informado o método HTTP da rota, ela será definida para
+ * todos os métodos. => A anotação @PathVariable indica que o valor da variável
+ * virá de uma informação da rota; => A anotação @RequestBody indica que o valor
+ * do objeto virá do corpo da requisição; => E a anotação @Valid indica que os
+ * dados recebidos devem ser validados.
+ */
