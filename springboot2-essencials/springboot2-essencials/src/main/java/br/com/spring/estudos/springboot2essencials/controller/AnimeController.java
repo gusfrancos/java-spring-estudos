@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.spring.estudos.springboot2essencials.domain.Anime;
@@ -69,6 +70,11 @@ public class AnimeController {
 		// outra forma
 		// return ResponseEntity.ok(animeService.listAll().get(id));
 	}
+	
+	 @GetMapping(path = "/find")
+	    public ResponseEntity<List<Anime>> findByName(@RequestParam String name) {
+	        return ResponseEntity.ok(animeService.findByName(name));
+	    }
 
 //	@GetMapping(path = "list2")
 //	public List<Anime> list2(){
