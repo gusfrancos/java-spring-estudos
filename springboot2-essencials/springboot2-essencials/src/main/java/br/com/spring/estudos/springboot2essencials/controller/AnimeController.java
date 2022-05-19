@@ -3,7 +3,6 @@ package br.com.spring.estudos.springboot2essencials.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,11 +23,6 @@ import br.com.spring.estudos.springboot2essencials.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("animes")
@@ -40,7 +34,7 @@ public class AnimeController {
 
     @GetMapping
     public ResponseEntity<List<Anime>> list() {
-        log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+
         return ResponseEntity.ok(animeService.listAll());
     }
 
@@ -65,15 +59,4 @@ public class AnimeController {
         animeService.replace(animePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-}
 
-/**
- * => A anotação @RestController permite definir um controller com
- * características REST; => A anotação @Autowired delega ao Spring Boot a
- * inicialização do objeto; => A anotação @RequestMapping permite definir uma
- * rota. Caso não seja informado o método HTTP da rota, ela será definida para
- * todos os métodos. => A anotação @PathVariable indica que o valor da variável
- * virá de uma informação da rota; => A anotação @RequestBody indica que o valor
- * do objeto virá do corpo da requisição; => E a anotação @Valid indica que os
- * dados recebidos devem ser validados.
- */

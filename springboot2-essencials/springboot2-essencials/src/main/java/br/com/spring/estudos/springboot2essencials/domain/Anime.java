@@ -16,10 +16,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Builder
 public class Anime {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+
 }
 
 //@Data do longbok vai gerar os getters, setters, equal, hashcode e etc... 
