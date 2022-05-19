@@ -3,7 +3,6 @@ package br.com.spring.estudos.springboot2essencials.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,53 +15,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.spring.estudos.springboot2essencials.domain.Anime;
+import br.com.spring.estudos.springboot2essencials.request.AnimePostRequestBody;
+import br.com.spring.estudos.springboot2essencials.request.AnimePutRequestBody;
 import br.com.spring.estudos.springboot2essencials.service.AnimeService;
 import br.com.spring.estudos.springboot2essencials.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("animes")
 @Log4j2
 @RequiredArgsConstructor
 public class AnimeController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AnimeController.class);
+    private final DateUtil dateUtil;
+    private final AnimeService animeService;
 
-	// Primeira forma de fazer é com autowired sem constructor
+    @GetMapping
+    public ResponseEntity<List<Anime>> list() {
+        log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
+        return ResponseEntity.ok(animeService.listAll());
+    }
 
-	@Autowired
-	private DateUtil dateUtil;
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Anime> findById(@PathVariable long id) {
+        return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
+    }
 
-	private final AnimeService animeService;
+    @PostMapping
+    public ResponseEntity<Anime> save(@RequestBody AnimePostRequestBody animePostRequestBody) {
+        return new ResponseEntity<>(animeService.save(animePostRequestBody), HttpStatus.CREATED);
+    }
 
-	@GetMapping
-	public ResponseEntity<List<Anime>> list() {
-		log.info(dateUtil.formatLocalDateTimeYoDataBaseStyle(LocalDateTime.now()));
-		return ResponseEntity.ok(animeService.listAll());
-	}
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id) {
+        animeService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
-	@GetMapping(path = "/{id}")
-	public ResponseEntity<Anime> findById(@PathVariable long id) {
-		return ResponseEntity.ok(animeService.findById(id));
-	}
-
-	@PostMapping
-	public ResponseEntity<Anime> save(@RequestBody Anime anime) {
-		return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
-	}
-
-	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable long id) {
-		animeService.delete(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
-	
-	@PutMapping
-    public ResponseEntity<Void> replace(@RequestBody Anime anime) {
-        animeService.replace(anime);
+    @PutMapping
+    public ResponseEntity<Void> replace(@RequestBody AnimePutRequestBody animePutRequestBody) {
+        animeService.replace(animePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
