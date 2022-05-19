@@ -44,9 +44,11 @@ public class AnimeService {
 
         animeRepository.save(anime);
     }
+
 }
 
 /**A anotação @Service representa esta classe como se fosse um serviço. 
  * Já as anotações @Autowired permitem que o Spring injete as dependências nesta classe
  */
+
 

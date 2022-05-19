@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.spring.estudos.springboot2essencials.domain.Anime;
@@ -22,7 +21,6 @@ import br.com.spring.estudos.springboot2essencials.service.AnimeService;
 import br.com.spring.estudos.springboot2essencials.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-
 
 @RestController
 @RequestMapping("animes")
@@ -73,6 +71,7 @@ public class AnimeController {
         animeService.replace(animePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
 
 /**
@@ -85,3 +84,4 @@ public class AnimeController {
  * do objeto virá do corpo da requisição; => E a anotação @Valid indica que os
  * dados recebidos devem ser validados.
  */
+
