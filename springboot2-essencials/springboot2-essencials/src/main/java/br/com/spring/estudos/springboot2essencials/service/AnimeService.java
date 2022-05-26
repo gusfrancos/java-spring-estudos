@@ -53,6 +53,10 @@ public class AnimeService {
         animeRepository.save(anime);
     }
 
+    public List<Anime> listAllNonPageable() {
+        return animeRepository.findAll();
+    }
+
 }
 
 /**A anotação @Service representa esta classe como se fosse um serviço. 
@@ -62,6 +66,9 @@ public class AnimeService {
 /*** Exemplos de como usar a paginação
  * http://localhost:8080/animes?size=5&page=0
  * http://localhost:8080/animes?size=5&page=1
+ * 
+ *   Exemplo para ordenar
+ *   localhost:8080/animes?size=20&order=id_desc
  * **/
  
 
