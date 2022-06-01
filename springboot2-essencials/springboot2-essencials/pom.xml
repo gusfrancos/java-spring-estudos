@@ -51,8 +51,17 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.24</version>
-
 		</dependency>
+		
+		<!--O H2 é um banco de dados Open Source que funciona em memória com um console acessível pelo browser dentro do contexto da aplicação.-->
+		<!-- estamos usando para testes-->
+		 <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+		
+		
 		<!-- o lombok deve ser declarado antes do mapstruct - Esta ordem importa-->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
