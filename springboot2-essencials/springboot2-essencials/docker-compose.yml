@@ -5,6 +5,7 @@ services:
     container_name: devdojodb
     environment:
       MYSQL_ROOT_PASSWORD: root
+    host: 192.168.1.254
     ports:
     - "3306:3306"
     volumes:
