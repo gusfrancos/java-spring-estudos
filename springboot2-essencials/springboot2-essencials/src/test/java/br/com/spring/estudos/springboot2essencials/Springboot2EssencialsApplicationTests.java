@@ -3,10 +3,10 @@ package br.com.spring.estudos.springboot2essencials;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class Springboot2EssencialsApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 
