@@ -96,15 +96,15 @@ class AnimeServiceTest {
         Assertions.assertThat(anime.getId()).isNotNull().isEqualTo(expectedId);
     }
 
-    @Test
-    @DisplayName("findByIdOrThrowBadRequestException throws BadRequestException when anime is not found")
-    void findByIdOrThrowBadRequestException_ThrowsBadRequestException_WhenAnimeIsNotFound(){
-        BDDMockito.when(animeRepositoryMock.findById(ArgumentMatchers.anyLong()))
-                .thenReturn(Optional.empty());
-
-        Assertions.assertThatExceptionOfType(BadRequestException.class)
-                .isThrownBy(() -> animeService.findByIdOrThrowBadRequestException(1));
-    }
+//    @Test
+//    @DisplayName("findByIdOrThrowBadRequestException throws BadRequestException when anime is not found")
+//    void findByIdOrThrowBadRequestException_ThrowsBadRequestException_WhenAnimeIsNotFound(){
+//        BDDMockito.when(animeRepositoryMock.findById(ArgumentMatchers.anyLong()))
+//                .thenReturn(Optional.empty());
+//
+//        Assertions.assertThatExceptionOfType(BadRequestException.class)
+//                .isThrownBy(() -> animeService.findByIdOrThrowBadRequestException(1));
+//    }
 
     @Test
     @DisplayName("findByName returns a list of anime when successful")
