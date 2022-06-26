@@ -2,6 +2,18 @@ docker-compose up (Levanta o conteiner se o volume não existir vai gerar um con
 docker ps (Lista de conteiners)
 docker ps -a (Lista de conteiners)
 docker-compose down
+docker image ls (lista todas as imagens)
 
 
 docker logout
+
+docker -it (id da Imagem) /bin/bash   / forma de executar uma imagem
+
+
+
+
+
+https://hub.docker.com/
+
+
+mvn jib:dockerBuild  (monta imagem do seu APP sem enviar para o docker hub)
