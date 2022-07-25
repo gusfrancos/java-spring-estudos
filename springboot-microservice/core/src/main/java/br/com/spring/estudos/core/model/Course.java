@@ -1,4 +1,4 @@
-package br.com.spring.estudos.course.model;
+package br.com.spring.estudos.core.model;
 
 import lombok.*;
 

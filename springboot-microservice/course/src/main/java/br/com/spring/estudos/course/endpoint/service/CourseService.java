@@ -4,14 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.spring.estudos.course.model.Course;
-import br.com.spring.estudos.course.repository.CourseRepository;
+import br.com.spring.estudos.core.model.Course;
+import br.com.spring.estudos.core.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-
-
-
 
 @Service
 @Slf4j
