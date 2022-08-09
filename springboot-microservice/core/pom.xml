@@ -12,6 +12,5 @@
 
 	<artifactId>core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>core</name>
-	<description>Projeto de estudo de microserviços Spring - Módulo Core</description>
+	
 </project>

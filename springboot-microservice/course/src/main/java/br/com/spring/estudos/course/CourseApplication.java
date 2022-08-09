@@ -9,9 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan({"br.com.spring.estudos.core.model"})
 @EnableJpaRepositories({"br.com.spring.estudos.core.repository"})
 public class CourseApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(CourseApplication.class, args);
 	}
-
 }
